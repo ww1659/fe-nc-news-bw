@@ -27,3 +27,11 @@ export const fetchUserByUsername = (username) => {
     return res.data.user;
   });
 };
+
+export const updateArticleVotes = (article_id, type) => {
+  return myApi
+    .patch(`/articles/${article_id}`, { incVotes: type === "up" ? 1 : -1 })
+    .then((res) => {
+      return res.data.article;
+    });
+};

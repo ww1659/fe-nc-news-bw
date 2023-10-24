@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchArticleById } from "../utils/api";
 import { Backbar } from "./Backbar";
-import { CommentBar } from "./CommentBar";
 import { CommentsList } from "./CommentsList";
+import { ArticleVotes } from "./ArticleVotes";
 
 export const IndividualArticle = () => {
   const [error, setError] = useState(null);
@@ -47,7 +47,7 @@ export const IndividualArticle = () => {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <img
               src={article[0].article_img_url}
-              alt="hello"
+              alt={`Image related to the topic: ${article[0].topic}`}
               style={{
                 maxWidth: "100%",
                 height: "auto",
@@ -62,6 +62,9 @@ export const IndividualArticle = () => {
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Typography variant="body1">{article[0].body}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <ArticleVotes votes={article[0].votes} articleId={articleId} />
           </Grid>
         </Grid>
         <CommentsList />
