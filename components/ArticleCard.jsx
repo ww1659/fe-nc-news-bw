@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Grid, Paper, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const ArticleCard = ({ article }) => {
   return (
@@ -10,19 +11,22 @@ export const ArticleCard = ({ article }) => {
         borderRadius: "4%",
         maxHeight: "100%",
         maxWidth: "400px",
+        backgroundColor: "#B8BACF",
       }}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Typography variant="subtitle2">Topic: {article.topic}</Typography>
+      <Grid container spacing={2} flex={1} flexGrow={1}>
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <Typography variant="subtitle2">
+            {article.topic.slice(0, 1).toUpperCase() +
+              article.topic.slice(1, article.topic.length)}
+          </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sm={6} md={6} lg={6}>
           <Typography variant="subtitle2">Author: {article.author}</Typography>
-        </Grid>{" "}
+        </Grid>
         <Grid item xs={6}>
           <Typography>
             <img
-              className="article-img"
               src={article.article_img_url}
               alt=""
               style={{
@@ -44,14 +48,17 @@ export const ArticleCard = ({ article }) => {
           <Typography
             variant="h6"
             style={{
-              whiteSpace: "nowrap",
               textOverflow: "ellipsis",
               overflow: "hidden",
+              whiteSpace: "nowrap",
             }}
           >
-            {article.title}
+            <Link to={`/articles/${article.article_id}`}>{article.title}</Link>
           </Typography>
         </Grid>
+      </Grid>
+      <Grid item xs={6}>
+        <Typography variant="subtitle2">Votes: {article.votes}</Typography>
       </Grid>
     </Paper>
   );
