@@ -31,14 +31,7 @@ export const IndividualArticle = () => {
       <Backbar />
       <div style={{ marginTop: 60 }}>
         <Grid container spacing={2}>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={12}
-            lg={12}
-            // style={{ border: "solid 1px blue" }}
-          >
+          <Grid item xs={12} sm={12} md={12} lg={12}>
             <Typography variant="overline">{article[0].topic}</Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -49,13 +42,9 @@ export const IndividualArticle = () => {
               src={article[0].article_img_url}
               alt="hello"
               style={{
-                display: "block",
-                marginLeft: "auto",
-                marginRight: "auto",
                 maxWidth: "100%",
                 height: "auto",
                 borderRadius: "10%",
-                border: "solid 1px black",
               }}
             />
           </Grid>
