@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchArticleById } from "../utils/api";
 import { Backbar } from "./Backbar";
+import { CommentBar } from "./CommentBar";
+import { CommentsList } from "./CommentsList";
 
 export const IndividualArticle = () => {
   const [error, setError] = useState(null);
@@ -38,6 +40,11 @@ export const IndividualArticle = () => {
             <Typography variant="h4">{article[0].title}</Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Typography variant="caption">
+              {new Date(article[0].created_at).toLocaleDateString("en-GB")}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
             <img
               src={article[0].article_img_url}
               alt="hello"
@@ -57,6 +64,7 @@ export const IndividualArticle = () => {
             <Typography variant="body1">{article[0].body}</Typography>
           </Grid>
         </Grid>
+        <CommentsList />
       </div>
     </Container>
   );
