@@ -1,26 +1,25 @@
-import axios from "axios";
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { ArticleCard } from "./ArticleCard";
 import { Container, Grid } from "@mui/material";
+import { fetchArticles } from "../utils/api";
 
-export const ArticlesList = () => {
+export const ArticlesList = ({ articles, setArticles }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .get("https://bw-news-app.onrender.com/api/articles")
-      .then((response) => {
+    fetchArticles()
+      .then((articles) => {
         setIsLoading(false);
-        setArticles(response.data.articles);
+        setArticles(articles);
       })
       .catch((err) => {
         setIsLoading(false);
         setError(err);
       });
-  }, []);
+  }, [setArticles]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.msg}</p>;
