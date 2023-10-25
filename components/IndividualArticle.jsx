@@ -1,16 +1,31 @@
 import { Container, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchArticleById } from "../utils/api";
+import { fetchArticleById, fetchComments } from "../utils/api";
 import { Backbar } from "./Backbar";
 import { CommentsList } from "./CommentsList";
 import { ArticleVotes } from "./ArticleVotes";
+import { AddCommentBar } from "./AddCommentBar";
 
 export const IndividualArticle = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [comments, setComments] = useState([]);
   const [article, setArticle] = useState([{}]);
   const { articleId } = useParams();
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchComments(articleId)
+      .then((fetchedComments) => {
+        setIsLoading(false);
+        setComments(fetchedComments);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+      });
+  }, [articleId]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -67,8 +82,13 @@ export const IndividualArticle = () => {
             <ArticleVotes votes={article[0].votes} articleId={articleId} />
           </Grid>
         </Grid>
-        <CommentsList />
+        <CommentsList articleId={articleId} comments={comments} />
       </div>
+      <AddCommentBar
+        articleId={articleId}
+        comments={comments}
+        setComments={setComments}
+      />
     </Container>
   );
 };

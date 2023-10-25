@@ -35,3 +35,11 @@ export const updateArticleVotes = (article_id, type) => {
       return res.data.article;
     });
 };
+
+export const updateComments = (article_id, newComment) => {
+  return myApi
+    .post(`/articles/${article_id}/comments`, newComment)
+    .then((res) => {
+      return res.data.comment;
+    });
+};
