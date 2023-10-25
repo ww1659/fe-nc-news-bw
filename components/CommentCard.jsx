@@ -30,7 +30,7 @@ export const CommentCard = ({ comment }) => {
   }, [comment.author]);
 
   if (userLoading) return <p>Loading...</p>;
-  if (userError) return <p>{userError}</p>;
+  if (userError) return <p>User error, sorry.</p>;
 
   return (
     <Container>
