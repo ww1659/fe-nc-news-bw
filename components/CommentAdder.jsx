@@ -36,8 +36,9 @@ export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
     };
     updateComments(articleId, newComment)
       .then((response) => {
+        console.log(response, "RESPONSE");
         setComments((currentComments) => {
-          return [{ ...currentComments }, response];
+          return [...currentComments, response[0]];
         });
       })
       .catch((err) => {

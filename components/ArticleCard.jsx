@@ -15,7 +15,7 @@ export const ArticleCard = ({ article }) => {
       }}
     >
       <Grid container spacing={2} flex={1} flexGrow={1}>
-        <Grid item xs={6} sm={6} md={6} lg={6}>
+        <Grid item xs={6} sm={6} md={12} lg={12}>
           <Typography variant="subtitle2">
             {article.topic.slice(0, 1).toUpperCase() +
               article.topic.slice(1, article.topic.length)}
@@ -28,7 +28,7 @@ export const ArticleCard = ({ article }) => {
           <Typography>
             <img
               src={article.article_img_url}
-              alt=""
+              alt="Image of Article"
               style={{
                 maxWidth: "100%",
                 height: "auto",
@@ -37,17 +37,10 @@ export const ArticleCard = ({ article }) => {
             />
           </Typography>
         </Grid>
-        <Grid
-          item
-          xs={6}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <Grid item xs={6}>
           <Typography
             variant="h6"
-            style={{
+            sx={{
               textOverflow: "ellipsis",
               overflow: "hidden",
               whiteSpace: "nowrap",

@@ -3,13 +3,13 @@ import { Container, Typography } from "@mui/material";
 export const Header = () => {
   return (
     <Container
-      style={{
+      sx={{
         display: "flex",
-        justifyContent: "center",
-        padding: "10px",
+        justifyContent: "left",
+        paddingTop: "10px",
       }}
     >
-      <Typography variant="h3">Articles</Typography>
+      <Typography variant="h3">NC News</Typography>
     </Container>
   );
 };
