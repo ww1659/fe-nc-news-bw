@@ -14,6 +14,8 @@ export const IndividualArticle = () => {
   const [article, setArticle] = useState([{}]);
   const { articleId } = useParams();
 
+  console.log(comments, "COMMENTS");
+
   useEffect(() => {
     setIsLoading(true);
     fetchComments(articleId)

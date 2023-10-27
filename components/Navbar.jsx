@@ -2,12 +2,18 @@
 import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import TopicIcon from "@mui/icons-material/Topic";
+import { Header } from "./Header";
 
 export const Navbar = ({ setIsDrawerOpen }) => {
+  const linkStyle = {
+    textDecoration: "none",
+    color: "black",
+  };
+
   return (
     <div>
       <AppBar position="static" style={{ backgroundColor: "#798071" }}>
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
           <IconButton
             size="large"
             edge="start"
@@ -19,9 +25,10 @@ export const Navbar = ({ setIsDrawerOpen }) => {
           >
             <TopicIcon title="topic list" />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/articles"> Home</Link>
-          </Typography>
+          <Link to="/" style={linkStyle}>
+            <Header />
+          </Link>
+
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

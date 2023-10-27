@@ -4,8 +4,14 @@ const myApi = axios.create({
   baseURL: "https://bw-news-app.onrender.com/api",
 });
 
-export const fetchArticles = (query) => {
-  return myApi.get(`/articles?topic=${query}`).then((res) => {
+export const fetchArticles = (topicQuery, orderQuery, sortQuery) => {
+  const path = `/articles?${topicQuery ? `topic=${topicQuery}` : ""}${
+    sortQuery ? `&sort_by=${sortQuery}` : ""
+  }${orderQuery ? `&order=${orderQuery}` : ""}`;
+
+  console.log(path);
+
+  return myApi.get(path).then((res) => {
     return res.data.articles;
   });
 };

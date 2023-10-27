@@ -3,6 +3,11 @@ import { Grid, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const ArticleCard = ({ article }) => {
+  const linkStyle = {
+    textDecoration: "none",
+    color: "black",
+  };
+
   return (
     <Paper
       elevation={6}
@@ -15,7 +20,7 @@ export const ArticleCard = ({ article }) => {
       }}
     >
       <Grid container spacing={2} flex={1} flexGrow={1}>
-        <Grid item xs={6} sm={6} md={12} lg={12}>
+        <Grid item xs={6} sm={6} md={6} lg={6}>
           <Typography variant="subtitle2">
             {article.topic.slice(0, 1).toUpperCase() +
               article.topic.slice(1, article.topic.length)}
@@ -24,7 +29,7 @@ export const ArticleCard = ({ article }) => {
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <Typography variant="subtitle2">Author: {article.author}</Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sm={6} md={6} lg={6}>
           <Typography>
             <img
               src={article.article_img_url}
@@ -37,16 +42,21 @@ export const ArticleCard = ({ article }) => {
             />
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sm={6} md={6} lg={6}>
           <Typography
-            variant="h6"
+            variant="h5"
             sx={{
               textOverflow: "ellipsis",
               overflow: "hidden",
-              whiteSpace: "nowrap",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              whiteSpace: "normal",
             }}
           >
-            <Link to={`/articles/${article.article_id}`}>{article.title}</Link>
+            <Link to={`/articles/${article.article_id}`} style={linkStyle}>
+              {article.title}
+            </Link>
           </Typography>
         </Grid>
       </Grid>
