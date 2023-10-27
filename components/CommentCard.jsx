@@ -2,6 +2,7 @@
 import { Avatar, Container, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchUserByUsername } from "../utils/api";
+import { DeleteComment } from "./DeleteComment";
 
 const numberOfDays = (datePosted) => {
   const start = new Date(datePosted);
@@ -11,7 +12,7 @@ const numberOfDays = (datePosted) => {
   return Math.round(diffInTime / oneDay);
 };
 
-export const CommentCard = ({ comment }) => {
+export const CommentCard = ({ comment, setComments }) => {
   const [userError, setUserError] = useState(null);
   const [userLoading, setUserLoading] = useState(false);
   const [user, setUser] = useState([{}]);
@@ -37,6 +38,11 @@ export const CommentCard = ({ comment }) => {
       <Grid container>
         <Grid item xs={6}>
           <Avatar alt={user[0].username} src={user[0].avatar_url} />
+        </Grid>
+        <Grid item xs={6}>
+          {comment.author === "cooljmessy" ? (
+            <DeleteComment comment={comment} setComments={setComments} />
+          ) : null}
         </Grid>
         <Grid item xs={12}>
           <Typography variant="subtitle2">

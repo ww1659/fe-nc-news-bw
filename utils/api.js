@@ -4,13 +4,23 @@ const myApi = axios.create({
   baseURL: "https://bw-news-app.onrender.com/api",
 });
 
-export const fetchArticles = (topicQuery, orderQuery, sortQuery) => {
-  const path = `/articles?${topicQuery ? `topic=${topicQuery}` : ""}${
-    sortQuery ? `&sort_by=${sortQuery}` : ""
-  }${orderQuery ? `&order=${orderQuery}` : ""}`;
+export const fetchArticles = (topicQuery, orderQuery, sortQuery, page) => {
+  const queries = [];
 
-  console.log(path);
+  if (topicQuery) {
+    queries.push(`topic=${topicQuery}`);
+  }
+  if (sortQuery) {
+    queries.push(`sort_by=${sortQuery}`);
+  }
+  if (orderQuery) {
+    queries.push(`order=${orderQuery}`);
+  }
+  if (page) {
+    queries.push(`p=${page}`);
+  }
 
+  const path = `/articles${queries.length > 0 ? "?" + queries.join("&") : ""}`;
   return myApi.get(path).then((res) => {
     return res.data.articles;
   });
@@ -54,4 +64,10 @@ export const updateComments = (article_id, newComment) => {
     .then((res) => {
       return res.data.comment;
     });
+};
+
+export const deleteCommentByCommentId = (comment_id) => {
+  return myApi.delete(`/comments/${comment_id}`).then((res) => {
+    return res;
+  });
 };

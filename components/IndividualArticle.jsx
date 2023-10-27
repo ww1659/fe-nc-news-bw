@@ -14,8 +14,6 @@ export const IndividualArticle = () => {
   const [article, setArticle] = useState([{}]);
   const { articleId } = useParams();
 
-  console.log(comments, "COMMENTS");
-
   useEffect(() => {
     setIsLoading(true);
     fetchComments(articleId)
@@ -84,7 +82,7 @@ export const IndividualArticle = () => {
             <ArticleVotes votes={article[0].votes} articleId={articleId} />
           </Grid>
         </Grid>
-        <CommentsList articleId={articleId} comments={comments} />
+        <CommentsList comments={comments} setComments={setComments} />
       </div>
       <AddCommentBar
         articleId={articleId}

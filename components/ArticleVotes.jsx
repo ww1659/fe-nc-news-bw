@@ -42,10 +42,10 @@ export const ArticleVotes = ({ votes, articleId }) => {
 
   return (
     <Grid container style={{ alignItems: "center" }}>
-      <Grid item xs={6}>
+      <Grid item xs={8}>
         <Typography variant="h6">Article votes: {articleVoteCount}</Typography>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <IconButton
           color={toggleUpButton ? "primary" : "inherit"}
           aria-label="like button"
@@ -55,7 +55,7 @@ export const ArticleVotes = ({ votes, articleId }) => {
           <ThumbUpOffAltIcon />
         </IconButton>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <IconButton
           color={toggleDownButton ? "primary" : "inherit"}
           aria-label="dislike button"

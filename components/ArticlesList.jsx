@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { ArticleCard } from "./ArticleCard";
 import { Container, Grid } from "@mui/material";
 import { fetchArticles } from "../utils/api";
+import { PaginateArticles } from "./PaginateArticles";
 
 export const ArticlesList = ({ searchParams }) => {
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(0);
 
   const topicQuery = searchParams.get("topic");
   const sortQuery = searchParams.get("sort_by");
@@ -15,7 +17,7 @@ export const ArticlesList = ({ searchParams }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchArticles(topicQuery, orderQuery, sortQuery)
+    fetchArticles(topicQuery, orderQuery, sortQuery, page)
       .then((articles) => {
         setIsLoading(false);
         setArticles(articles);
@@ -24,13 +26,14 @@ export const ArticlesList = ({ searchParams }) => {
         setIsLoading(false);
         setError(err);
       });
-  }, [topicQuery, orderQuery, sortQuery]);
+  }, [topicQuery, orderQuery, sortQuery, page]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.msg}</p>;
 
   return (
     <Container>
+      <PaginateArticles page={page} setPage={setPage} />
       <Grid container spacing={2}>
         {articles.map((article, key) => {
           return (

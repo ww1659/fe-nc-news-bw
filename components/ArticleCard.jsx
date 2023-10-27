@@ -61,7 +61,9 @@ export const ArticleCard = ({ article }) => {
         </Grid>
       </Grid>
       <Grid item xs={6}>
-        <Typography variant="subtitle2">Votes: {article.votes}</Typography>
+        <Typography variant="subtitle1">
+          Votes: <span style={{ color: "purple" }}>{article.votes}</span>
+        </Typography>
       </Grid>
     </Paper>
   );

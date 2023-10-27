@@ -74,7 +74,7 @@ export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
       TransitionComponent={Transition}
       keepMounted
       onClose={handleClose}
-      aria-describedby="alert-dialog-slide-description"
+      aria-describedby="add-comment"
     >
       <Box
         sx={{
