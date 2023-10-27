@@ -34,12 +34,24 @@ export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
       body: userInput,
       username: "cooljmessy",
     };
+
+    // setComments((currentComments) => {
+    //   return [...currentComments, response[0]];
+    // });
+    setComments((currentComments) => {
+      return [
+        ...currentComments,
+        {
+          body: userInput,
+          votes: 0,
+          author: newComment.username,
+          created_at: Date.now(),
+        },
+      ];
+    });
     updateComments(articleId, newComment)
       .then((response) => {
         console.log(response, "RESPONSE");
-        setComments((currentComments) => {
-          return [...currentComments, response[0]];
-        });
       })
       .catch((err) => {
         setFormError(err);
@@ -47,7 +59,12 @@ export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
     setUserInput("");
   };
 
-  if (formError) return <Typography>Sorry, please try again.</Typography>;
+  if (formError)
+    return (
+      <Typography variant="subtitle2">
+        Sorry, your comment was not posted. Please try again.
+      </Typography>
+    );
 
   return (
     <Dialog

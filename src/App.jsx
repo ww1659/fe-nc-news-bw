@@ -1,17 +1,15 @@
 import "./App.css";
-import { Header } from "../components/Header";
 import { ArticlesList } from "../components/ArticlesList";
-import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
 import { IndividualArticle } from "../components/IndividualArticle";
+import { FilterArticles } from "../components/FilterArticles";
 // import { TopicDrawer } from "../components/TopicDrawer";
 // import { ArticlesByTopic } from "../components/ArticlesByTopic";
-import { FilterArticles } from "../components/FilterArticles";
 
 function App() {
-  const [articles, setArticles] = useState([]);
   // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <>
@@ -21,12 +19,15 @@ function App() {
       /> */}
       <Routes>
         <Route
-          path="/articles"
+          path="/"
           element={
             <>
               <Navbar />
-              <Header />
-              <ArticlesList articles={articles} setArticles={setArticles} />
+              <FilterArticles
+                searchParams={searchParams}
+                setSearchParams={setSearchParams}
+              />
+              <ArticlesList searchParams={searchParams} />
             </>
           }
         ></Route>

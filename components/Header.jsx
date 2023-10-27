@@ -5,11 +5,9 @@ export const Header = () => {
     <Container
       sx={{
         display: "flex",
-        justifyContent: "left",
-        paddingTop: "10px",
       }}
     >
-      <Typography variant="h3">NC News</Typography>
+      <Typography variant="h4">NC NEWS</Typography>
     </Container>
   );
 };
