@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Button, Grid } from "@mui/material";
-import AddCommentIcon from "@mui/icons-material/AddComment";
 import { useState } from "react";
 import { CommentAdder } from "./CommentAdder";
+import AddCommentIcon from "@mui/icons-material/AddComment";
 
-export const AddCommentBar = ({ comments, setComments, articleId }) => {
+export const AddCommentBar = ({ setComments, articleId }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -42,7 +42,6 @@ export const AddCommentBar = ({ comments, setComments, articleId }) => {
       {open ? (
         <CommentAdder
           articleId={articleId}
-          comments={comments}
           setComments={setComments}
           open={open}
           setOpen={setOpen}

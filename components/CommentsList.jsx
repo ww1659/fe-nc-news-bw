@@ -2,7 +2,7 @@
 import { Container, Divider, Stack } from "@mui/material";
 import { CommentCard } from "./CommentCard";
 
-export const CommentsList = ({ comments, setComments }) => {
+export const CommentsList = ({ comments, setComments, showNotification }) => {
   return (
     <Container maxWidth={false} disableGutters style={{ paddingTop: "20px" }}>
       <Divider variant="fullWidth" style={{ margin: "10px 0" }} />
@@ -13,6 +13,7 @@ export const CommentsList = ({ comments, setComments }) => {
               key={key}
               comment={comment}
               setComments={setComments}
+              showNotification={showNotification}
             />
           );
         })}

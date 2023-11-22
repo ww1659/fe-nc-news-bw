@@ -10,6 +10,7 @@ export const ArticlesList = ({ searchParams }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
+  const [totalArticles, setTotalArticles] = useState(0);
 
   const topicQuery = searchParams.get("topic");
   const sortQuery = searchParams.get("sort_by");
@@ -21,6 +22,7 @@ export const ArticlesList = ({ searchParams }) => {
       .then((articles) => {
         setIsLoading(false);
         setArticles(articles);
+        setTotalArticles(articles[0].full_count);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -33,7 +35,11 @@ export const ArticlesList = ({ searchParams }) => {
 
   return (
     <Container>
-      <PaginateArticles page={page} setPage={setPage} />
+      <PaginateArticles
+        page={page}
+        setPage={setPage}
+        totalArticles={totalArticles}
+      />
       <Grid container spacing={2}>
         {articles.map((article, key) => {
           return (

@@ -20,8 +20,8 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
-  const [userInput, setUserInput] = useState("");
   const [formError, setFormError] = useState(false);
+  const [userInput, setUserInput] = useState("");
 
   const handleClose = () => {
     setOpen(false);
@@ -29,29 +29,29 @@ export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     setOpen(false);
-    const newComment = {
+    const addedComment = {
       body: userInput,
       username: "cooljmessy",
     };
 
-    // setComments((currentComments) => {
-    //   return [...currentComments, response[0]];
-    // });
     setComments((currentComments) => {
       return [
-        ...currentComments,
         {
           body: userInput,
           votes: 0,
-          author: newComment.username,
+          author: addedComment.username,
           created_at: Date.now(),
+          isOptimistic: true,
         },
+        ...currentComments,
       ];
     });
-    updateComments(articleId, newComment)
+
+    updateComments(articleId, addedComment)
       .then((response) => {
-        console.log(response, "RESPONSE");
+        console.log(response, "RESPONSE FROM API");
       })
       .catch((err) => {
         setFormError(err);

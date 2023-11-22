@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import {
-  Alert,
-  AlertTitle,
   Box,
   Button,
   Dialog,
@@ -17,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { deleteCommentByCommentId } from "../utils/api";
 import { useState } from "react";
 
-export const DeleteComment = ({ comment, setComments }) => {
+export const DeleteComment = ({ comment, setComments, showNotification }) => {
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -32,20 +30,23 @@ export const DeleteComment = ({ comment, setComments }) => {
   const handleDelete = (event) => {
     setOpen(false);
     const commentId = event.currentTarget.value;
-    console.log(commentId);
+
+    setComments((currentComments) => {
+      const updatedComments = currentComments.filter((currentComment) => {
+        return currentComment.comment_id !== Number(commentId);
+      });
+
+      return updatedComments;
+    });
+
     deleteCommentByCommentId(commentId)
       .then(() => {
         setError(false);
+        showNotification("Comment deleted :)");
       })
       .catch((err) => {
         setError(err);
       });
-
-    setComments((currentComments) => {
-      return currentComments.filter((currentComment) => {
-        return currentComment.comment_id !== commentId;
-      });
-    });
   };
 
   if (error)

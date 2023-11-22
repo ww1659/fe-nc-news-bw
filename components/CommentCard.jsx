@@ -12,7 +12,7 @@ const numberOfDays = (datePosted) => {
   return Math.round(diffInTime / oneDay);
 };
 
-export const CommentCard = ({ comment, setComments }) => {
+export const CommentCard = ({ comment, setComments, showNotification }) => {
   const [userError, setUserError] = useState(null);
   const [userLoading, setUserLoading] = useState(false);
   const [user, setUser] = useState([{}]);
@@ -35,13 +35,26 @@ export const CommentCard = ({ comment, setComments }) => {
 
   return (
     <Container>
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          ...(comment.isOptimistic && {
+            padding: "2px",
+            border: "solid 2px purple",
+            borderRadius: "10px",
+          }),
+        }}
+      >
         <Grid item xs={6}>
           <Avatar alt={user[0].username} src={user[0].avatar_url} />
         </Grid>
         <Grid item xs={6}>
           {comment.author === "cooljmessy" ? (
-            <DeleteComment comment={comment} setComments={setComments} />
+            <DeleteComment
+              comment={comment}
+              setComments={setComments}
+              showNotification={showNotification}
+            />
           ) : null}
         </Grid>
         <Grid item xs={12}>

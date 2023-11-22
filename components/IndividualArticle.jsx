@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Alert, Container, Grid, IconButton, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchArticleById, fetchComments } from "../utils/api";
@@ -6,13 +6,28 @@ import { Backbar } from "./Backbar";
 import { CommentsList } from "./CommentsList";
 import { ArticleVotes } from "./ArticleVotes";
 import { AddCommentBar } from "./AddCommentBar";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const IndividualArticle = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState([]);
   const [article, setArticle] = useState([{}]);
+  const [notification, setNotification] = useState({
+    message: "",
+    visible: false,
+  });
   const { articleId } = useParams();
+
+  console.log(notification.visible);
+
+  const showNotification = (message) => {
+    setNotification({ message, visible: true });
+
+    setTimeout(() => {
+      setNotification({ message: "", visible: false });
+    }, 10000);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -82,13 +97,43 @@ export const IndividualArticle = () => {
             <ArticleVotes votes={article[0].votes} articleId={articleId} />
           </Grid>
         </Grid>
-        <CommentsList comments={comments} setComments={setComments} />
+        <CommentsList
+          comments={comments}
+          setComments={setComments}
+          showNotification={showNotification}
+        />
       </div>
-      <AddCommentBar
-        articleId={articleId}
-        comments={comments}
-        setComments={setComments}
-      />
+      {notification.visible ? (
+        <div
+          style={{
+            border: "solid 2px black",
+            position: "fixed",
+            bottom: "10%",
+            left: "10%",
+            right: "10%",
+            zIndex: 999,
+          }}
+        >
+          <Alert
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setNotification({ message: "", visible: false });
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            open={notification.visible}
+          >
+            {notification.message}
+          </Alert>
+        </div>
+      ) : null}
+      <AddCommentBar articleId={articleId} setComments={setComments} />
     </Container>
   );
 };
