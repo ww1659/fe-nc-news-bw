@@ -12,7 +12,12 @@ const numberOfDays = (datePosted) => {
   return Math.round(diffInTime / oneDay);
 };
 
-export const CommentCard = ({ comment, setComments, showNotification }) => {
+export const CommentCard = ({
+  comment,
+  setComments,
+  setCommentCount,
+  showNotification,
+}) => {
   const [userError, setUserError] = useState(null);
   const [userLoading, setUserLoading] = useState(false);
   const [user, setUser] = useState([{}]);
@@ -39,9 +44,8 @@ export const CommentCard = ({ comment, setComments, showNotification }) => {
         container
         sx={{
           ...(comment.isOptimistic && {
-            padding: "2px",
-            border: "solid 2px purple",
-            borderRadius: "10px",
+            backgroundColor: "purple",
+            opacity: "50%",
           }),
         }}
       >
@@ -53,6 +57,7 @@ export const CommentCard = ({ comment, setComments, showNotification }) => {
             <DeleteComment
               comment={comment}
               setComments={setComments}
+              setCommentCount={setCommentCount}
               showNotification={showNotification}
             />
           ) : null}

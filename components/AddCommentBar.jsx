@@ -12,7 +12,7 @@ export const AddCommentBar = ({ setComments, articleId }) => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: "15%" }}>
       <Grid
         container
         style={{
@@ -24,7 +24,6 @@ export const AddCommentBar = ({ setComments, articleId }) => {
           right: 0,
           padding: "1.5%",
           backgroundColor: "#798071",
-          marginTop: "10px",
         }}
       >
         <Grid item xs={12}>

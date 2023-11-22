@@ -15,7 +15,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { deleteCommentByCommentId } from "../utils/api";
 import { useState } from "react";
 
-export const DeleteComment = ({ comment, setComments, showNotification }) => {
+export const DeleteComment = ({
+  comment,
+  setComments,
+  setCommentCount,
+  showNotification,
+}) => {
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -37,6 +42,10 @@ export const DeleteComment = ({ comment, setComments, showNotification }) => {
       });
 
       return updatedComments;
+    });
+
+    setCommentCount((currentCount) => {
+      return --currentCount;
     });
 
     deleteCommentByCommentId(commentId)

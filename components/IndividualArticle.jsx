@@ -12,14 +12,13 @@ export const IndividualArticle = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
   const [article, setArticle] = useState([{}]);
   const [notification, setNotification] = useState({
     message: "",
     visible: false,
   });
   const { articleId } = useParams();
-
-  console.log(notification.visible);
 
   const showNotification = (message) => {
     setNotification({ message, visible: true });
@@ -34,7 +33,8 @@ export const IndividualArticle = () => {
     fetchComments(articleId)
       .then((fetchedComments) => {
         setIsLoading(false);
-        setComments(fetchedComments);
+        setComments(fetchedComments.comments);
+        setCommentCount(fetchedComments.commentCount);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -100,7 +100,10 @@ export const IndividualArticle = () => {
         <CommentsList
           comments={comments}
           setComments={setComments}
+          commentCount={commentCount}
+          setCommentCount={setCommentCount}
           showNotification={showNotification}
+          notification={notification}
         />
       </div>
       {notification.visible ? (

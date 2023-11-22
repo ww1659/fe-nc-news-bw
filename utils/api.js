@@ -33,8 +33,8 @@ export const fetchArticleById = (article_id) => {
 };
 
 export const fetchComments = (article_id) => {
-  return myApi.get(`/articles/${article_id}/comments`).then((res) => {
-    return res.data.comments;
+  return myApi.get(`/articles/${article_id}/comments?limit=50`).then((res) => {
+    return res.data;
   });
 };
 
