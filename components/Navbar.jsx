@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
-import TopicIcon from "@mui/icons-material/Topic";
 import { Header } from "./Header";
+import TopicIcon from "@mui/icons-material/Topic";
+import PersonIcon from "@mui/icons-material/Person";
 
 export const Navbar = ({ setIsDrawerOpen }) => {
   const linkStyle = {
@@ -11,8 +12,8 @@ export const Navbar = ({ setIsDrawerOpen }) => {
   };
 
   return (
-    <div>
-      <AppBar position="static" style={{ backgroundColor: "#798071" }}>
+    <div style={{ marginBottom: "70px" }}>
+      <AppBar position="fixed" style={{ backgroundColor: "#798071" }}>
         <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
           <IconButton
             size="large"
@@ -28,8 +29,11 @@ export const Navbar = ({ setIsDrawerOpen }) => {
           <Link to="/" style={linkStyle}>
             <Header />
           </Link>
-
-          <Button color="inherit">Login</Button>
+          <Link to="/login">
+            <Avatar sx={{ ml: "auto" }}>
+              <PersonIcon />
+            </Avatar>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

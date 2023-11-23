@@ -1,9 +1,11 @@
 import "./App.css";
-import { ArticlesList } from "../components/ArticlesList";
 import { Route, Routes, useSearchParams } from "react-router-dom";
+
+import { ArticlesList } from "../components/ArticlesList";
 import { Navbar } from "../components/Navbar";
 import { IndividualArticle } from "../components/IndividualArticle";
 import { FilterArticles } from "../components/FilterArticles";
+import { LoginPage } from "../components/LoginPage";
 // import { TopicDrawer } from "../components/TopicDrawer";
 // import { ArticlesByTopic } from "../components/ArticlesByTopic";
 
@@ -28,6 +30,14 @@ function App() {
                 setSearchParams={setSearchParams}
               />
               <ArticlesList searchParams={searchParams} />
+            </>
+          }
+        ></Route>
+        <Route
+          path={`/login`}
+          element={
+            <>
+              <Navbar /> <LoginPage />
             </>
           }
         ></Route>

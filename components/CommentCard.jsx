@@ -3,6 +3,7 @@ import { Avatar, Container, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchUserByUsername } from "../utils/api";
 import { DeleteComment } from "./DeleteComment";
+import { useAuth } from "../utils/auth";
 
 const numberOfDays = (datePosted) => {
   const start = new Date(datePosted);
@@ -18,25 +19,26 @@ export const CommentCard = ({
   setCommentCount,
   showNotification,
 }) => {
-  const [userError, setUserError] = useState(null);
-  const [userLoading, setUserLoading] = useState(false);
-  const [user, setUser] = useState([{}]);
+  const [authorError, setAuthorError] = useState(null);
+  const [authorLoading, setAuthorLoading] = useState(false);
+  const [author, setAuthor] = useState([{}]);
+  const { user, login, logout } = useAuth();
 
   useEffect(() => {
-    setUserLoading(true);
+    setAuthorLoading(true);
     fetchUserByUsername(comment.author)
       .then((fetchedUser) => {
-        setUserLoading(false);
-        setUser(fetchedUser);
+        setAuthorLoading(false);
+        setAuthor(fetchedUser);
       })
       .catch((err) => {
-        setUserLoading(false);
-        setUserError(err);
+        setAuthorLoading(false);
+        setAuthorError(err);
       });
   }, [comment.author]);
 
-  if (userLoading) return <p>Loading...</p>;
-  if (userError) return <p>User error, sorry.</p>;
+  if (authorLoading) return <p>Loading...</p>;
+  if (authorError) return <p>User error, sorry.</p>;
 
   return (
     <Container>
@@ -50,7 +52,7 @@ export const CommentCard = ({
         }}
       >
         <Grid item xs={6}>
-          <Avatar alt={user[0].username} src={user[0].avatar_url} />
+          <Avatar alt={author[0].username} src={author[0].avatar_url} />
         </Grid>
         <Grid item xs={6}>
           {comment.author === "cooljmessy" ? (
