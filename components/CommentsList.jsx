@@ -14,7 +14,6 @@ export const CommentsList = ({
 }) => {
   const [visibleComments, setVisibleComments] = useState(5);
   const observerRef = useRef(null);
-  console.log(observerRef);
 
   useEffect(() => {
     const observerOptions = {

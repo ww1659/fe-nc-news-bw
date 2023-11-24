@@ -61,7 +61,7 @@ export const LoginPage = () => {
           setTimeout(() => {
             setLoginLoading(false);
             navigate(`/`);
-          }, 2000);
+          }, 2500);
           console.log(response);
         })
         .catch((err) => {

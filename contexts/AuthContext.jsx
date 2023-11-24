@@ -1,6 +1,21 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
-import { loginUser } from "../utils/api";
+import { createContext, useState, useEffect } from "react";
+import { fetchUserByUsername, loginUser } from "../utils/api";
+
+const setCookie = (name, value, days) => {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+};
+
+const getCookie = (name) => {
+  const match = document.cookie.match(new RegExp(`${name}=([^;]+)`));
+  return match ? match[1] : null;
+};
+
+const clearCookie = (name) => {
+  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+};
 
 export const AuthContext = createContext();
 
@@ -12,10 +27,15 @@ export const AuthProvider = ({ children }) => {
     role: "guest",
   });
 
+  useEffect(() => {
+    checkUserStatus();
+  }, []);
+
   const login = (userInput) => {
     return loginUser(userInput).then((response) => {
       const user = response.user;
       if (response.status === 200 && user.valid) {
+        setCookie("userId", user.user[0].username, 1);
         setUser({
           name: user.user[0].name,
           username: user.user[0].username,
@@ -40,6 +60,28 @@ export const AuthProvider = ({ children }) => {
       username: "guest",
       role: "guest",
     });
+    clearCookie("userId");
+  };
+
+  const checkUserStatus = () => {
+    console.log("CHECKING USER STATUS");
+
+    const userId = getCookie("userId");
+    console.log(userId);
+
+    if (userId) {
+      return fetchUserByUsername(userId).then((response) => {
+        const userData = response[0];
+        console.log(userData);
+
+        setUser({
+          name: userData.name,
+          username: userData.username,
+          avatar: userData.avatar_url,
+          role: "user",
+        });
+      });
+    }
   };
 
   return (

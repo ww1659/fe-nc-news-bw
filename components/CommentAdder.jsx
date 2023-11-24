@@ -14,6 +14,7 @@ import { forwardRef, useState } from "react";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import CloseIcon from "@mui/icons-material/Close";
 import { updateComments } from "../utils/api";
+import { useAuth } from "../utils/auth";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -22,6 +23,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
   const [formError, setFormError] = useState(false);
   const [userInput, setUserInput] = useState("");
+  const { user } = useAuth();
 
   const handleClose = () => {
     setOpen(false);
@@ -33,7 +35,7 @@ export const CommentAdder = ({ articleId, setComments, open, setOpen }) => {
     setOpen(false);
     const addedComment = {
       body: userInput,
-      username: "cooljmessy",
+      username: user.username,
     };
 
     setComments((currentComments) => {
