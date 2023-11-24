@@ -71,3 +71,14 @@ export const deleteCommentByCommentId = (comment_id) => {
     return res;
   });
 };
+
+export const loginUser = (userInput) => {
+  return myApi
+    .post(`/login`, userInput)
+    .then((response) => {
+      return { status: response.status, user: response.data };
+    })
+    .catch((err) => {
+      return { status: err.response.status, msg: err.response.data.msg };
+    });
+};

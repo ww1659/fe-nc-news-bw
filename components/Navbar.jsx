@@ -2,10 +2,13 @@
 import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Header } from "./Header";
+import { useAuth } from "../utils/auth";
 import TopicIcon from "@mui/icons-material/Topic";
 import PersonIcon from "@mui/icons-material/Person";
 
 export const Navbar = ({ setIsDrawerOpen }) => {
+  const { user } = useAuth();
+
   const linkStyle = {
     textDecoration: "none",
     color: "black",
@@ -31,7 +34,15 @@ export const Navbar = ({ setIsDrawerOpen }) => {
           </Link>
           <Link to="/login">
             <Avatar sx={{ ml: "auto" }}>
-              <PersonIcon />
+              {user.role === "guest" ? (
+                <PersonIcon />
+              ) : (
+                <img
+                  src={user.avatar}
+                  alt="User Avatar"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              )}
             </Avatar>
           </Link>
         </Toolbar>

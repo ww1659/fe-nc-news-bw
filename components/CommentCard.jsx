@@ -3,7 +3,6 @@ import { Avatar, Container, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchUserByUsername } from "../utils/api";
 import { DeleteComment } from "./DeleteComment";
-import { useAuth } from "../utils/auth";
 
 const numberOfDays = (datePosted) => {
   const start = new Date(datePosted);
@@ -22,7 +21,6 @@ export const CommentCard = ({
   const [authorError, setAuthorError] = useState(null);
   const [authorLoading, setAuthorLoading] = useState(false);
   const [author, setAuthor] = useState([{}]);
-  const { user, login, logout } = useAuth();
 
   useEffect(() => {
     setAuthorLoading(true);
