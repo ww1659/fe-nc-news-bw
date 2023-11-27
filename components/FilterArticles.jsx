@@ -1,5 +1,12 @@
 /* eslint-disable react/prop-types */
-import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Container,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchTopics } from "../utils/api";
 
@@ -54,65 +61,68 @@ export const FilterArticles = ({ searchParams, setSearchParams }) => {
   if (topicError) return <p>Error with topics, please refresh</p>;
 
   return (
-    <Grid container spacing={2} sx={{ mt: 0, mb: 2 }}>
-      <Grid item xs={12} lg={6} alignItems="center" justifyContent="center">
-        <FormControl fullWidth>
-          <InputLabel color="secondary">Select Topic</InputLabel>
-          <Select
-            color="secondary"
-            value={filterTopic}
-            label="Select Topic"
-            onChange={topicSelect}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {topics.map((topic, key) => {
-              return (
-                <MenuItem key={key} value={topic.slug}>
-                  {topic.slug.slice(0, 1).toUpperCase() +
-                    topic.slug.slice(1, topic.slug.length)}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+    <Container>
+      {" "}
+      <Grid container spacing={2} sx={{ mt: 0, mb: 2 }}>
+        <Grid item xs={12} lg={6} alignItems="center" justifyContent="center">
+          <FormControl fullWidth>
+            <InputLabel color="secondary">Select Topic</InputLabel>
+            <Select
+              color="secondary"
+              value={filterTopic}
+              label="Select Topic"
+              onChange={topicSelect}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {topics.map((topic, key) => {
+                return (
+                  <MenuItem key={key} value={topic.slug}>
+                    {topic.slug.slice(0, 1).toUpperCase() +
+                      topic.slug.slice(1, topic.slug.length)}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel color="secondary">Sort</InputLabel>
+            <Select
+              color="secondary"
+              value={sortBy}
+              label="Sort"
+              onChange={handleSort}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"created_at"}>Date</MenuItem>
+              <MenuItem value={"comment_count"}>Comments</MenuItem>
+              <MenuItem value={"votes"}>Votes</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel color="secondary">Order</InputLabel>
+            <Select
+              color="secondary"
+              value={orderBy}
+              label="Order"
+              onChange={handleOrder}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"asc"}>Ascending</MenuItem>
+              <MenuItem value={"desc"}>Descending</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
       </Grid>
-      <Grid item xs={6} lg={3}>
-        <FormControl fullWidth>
-          <InputLabel color="secondary">Sort</InputLabel>
-          <Select
-            color="secondary"
-            value={sortBy}
-            label="Sort"
-            onChange={handleSort}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"created_at"}>Date</MenuItem>
-            <MenuItem value={"comment_count"}>Comments</MenuItem>
-            <MenuItem value={"votes"}>Votes</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={6} lg={3}>
-        <FormControl fullWidth>
-          <InputLabel color="secondary">Order</InputLabel>
-          <Select
-            color="secondary"
-            value={orderBy}
-            label="Order"
-            onChange={handleOrder}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"asc"}>Ascending</MenuItem>
-            <MenuItem value={"desc"}>Descending</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
+    </Container>
   );
 };

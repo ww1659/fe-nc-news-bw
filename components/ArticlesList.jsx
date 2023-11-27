@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { ArticleCard } from "./ArticleCard";
-import { Container, Grid } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 import { fetchArticles } from "../utils/api";
 import { PaginateArticles } from "./PaginateArticles";
 
@@ -30,7 +30,19 @@ export const ArticlesList = ({ searchParams }) => {
       });
   }, [topicQuery, orderQuery, sortQuery, page]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress color="secondary"></CircularProgress>
+      </Container>
+    );
   if (error) return <p>{error.msg}</p>;
 
   return (
@@ -43,7 +55,19 @@ export const ArticlesList = ({ searchParams }) => {
       <Grid container spacing={2}>
         {articles.map((article, key) => {
           return (
-            <Grid item xs={12} sm={6} md={4} lg={4} key={key}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={4}
+              key={key}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <ArticleCard article={article} />
             </Grid>
           );

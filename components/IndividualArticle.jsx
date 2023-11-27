@@ -1,4 +1,11 @@
-import { Alert, Container, Grid, IconButton, Typography } from "@mui/material";
+import {
+  Alert,
+  CircularProgress,
+  Container,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchArticleById, fetchComments } from "../utils/api";
@@ -55,7 +62,19 @@ export const IndividualArticle = ({ setIsProfileDrawerOpen }) => {
       });
   }, [articleId]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress color="secondary"></CircularProgress>
+      </Container>
+    );
   if (error) return <p>{error}</p>;
 
   return (
