@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../utils/auth";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonIcon from "@mui/icons-material/Person";
 
-export const Backbar = () => {
+export const Backbar = ({ setIsProfileDrawerOpen }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -24,19 +25,23 @@ export const Backbar = () => {
         >
           <ArrowBackIcon />
         </IconButton>
-        <Link to="/login">
-          <Avatar sx={{ ml: "auto" }}>
-            {user.role === "guest" ? (
+        {user.role === "guest" ? (
+          <Link to="/login">
+            <Avatar sx={{ ml: "auto" }}>
               <PersonIcon />
-            ) : (
+            </Avatar>
+          </Link>
+        ) : (
+          <div onClick={() => setIsProfileDrawerOpen(true)}>
+            <Avatar sx={{ ml: "auto" }}>
               <img
                 src={user.avatar}
                 alt="User Avatar"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-            )}
-          </Avatar>
-        </Link>
+            </Avatar>
+          </div>
+        )}
       </Toolbar>
     </AppBar>
   );

@@ -6,7 +6,7 @@ import { useAuth } from "../utils/auth";
 import TopicIcon from "@mui/icons-material/Topic";
 import PersonIcon from "@mui/icons-material/Person";
 
-export const Navbar = ({ setIsDrawerOpen }) => {
+export const Navbar = ({ setIsDrawerOpen, setIsProfileDrawerOpen }) => {
   const { user } = useAuth();
 
   const linkStyle = {
@@ -32,19 +32,23 @@ export const Navbar = ({ setIsDrawerOpen }) => {
           <Link to="/" style={linkStyle}>
             <Header />
           </Link>
-          <Link to="/login">
-            <Avatar sx={{ ml: "auto" }}>
-              {user.role === "guest" ? (
+          {user.role === "guest" ? (
+            <Link to="/login">
+              <Avatar sx={{ ml: "auto" }}>
                 <PersonIcon />
-              ) : (
+              </Avatar>
+            </Link>
+          ) : (
+            <div onClick={() => setIsProfileDrawerOpen(true)}>
+              <Avatar sx={{ ml: "auto" }}>
                 <img
                   src={user.avatar}
                   alt="User Avatar"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-              )}
-            </Avatar>
-          </Link>
+              </Avatar>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </div>

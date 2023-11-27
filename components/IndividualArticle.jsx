@@ -8,7 +8,7 @@ import { ArticleVotes } from "./ArticleVotes";
 import { AddCommentBar } from "./AddCommentBar";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const IndividualArticle = () => {
+export const IndividualArticle = ({ setIsProfileDrawerOpen }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState([]);
@@ -60,7 +60,7 @@ export const IndividualArticle = () => {
 
   return (
     <Container>
-      <Backbar />
+      <Backbar setIsProfileDrawerOpen={setIsProfileDrawerOpen} />
       <div style={{ marginTop: 70 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={12} lg={12}>

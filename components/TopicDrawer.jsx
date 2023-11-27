@@ -34,7 +34,7 @@ export const TopicDrawer = ({ isDrawerOpen, setIsDrawerOpen }) => {
         setIsTopicLoading(false);
         setTopicError(err);
       });
-  }, [setTopics]);
+  }, []);
 
   const handleTopicClick = (topic) => {
     console.log(topic);
