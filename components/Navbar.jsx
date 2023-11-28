@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Avatar, Button, IconButton, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Header } from "./Header";
 import { useAuth } from "../utils/auth";
 import TopicIcon from "@mui/icons-material/Topic";
 import PersonIcon from "@mui/icons-material/Person";
 
-export const Navbar = ({ setIsDrawerOpen, setIsProfileDrawerOpen }) => {
+export const Navbar = ({ setIsTopicDrawerOpen, setIsProfileDrawerOpen }) => {
   const { user } = useAuth();
 
   const linkStyle = {
@@ -17,15 +17,19 @@ export const Navbar = ({ setIsDrawerOpen, setIsProfileDrawerOpen }) => {
   return (
     <div style={{ marginBottom: "70px" }}>
       <AppBar position="fixed" style={{ backgroundColor: "#798071" }}>
-        <Toolbar sx={{ justifyContent: "space-between", alignItems: "center" }}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
-            key="menu-button"
-            onClick={() => setIsDrawerOpen(true)}
+            key="topic-button"
+            onClick={() => setIsTopicDrawerOpen(true)}
           >
             <TopicIcon title="topic list" />
           </IconButton>

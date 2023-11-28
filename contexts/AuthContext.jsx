@@ -64,15 +64,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const checkUserStatus = () => {
-    console.log("CHECKING USER STATUS");
-
     const userId = getCookie("userId");
-    console.log(userId);
 
     if (userId) {
       return fetchUserByUsername(userId).then((response) => {
         const userData = response[0];
-        console.log(userData);
 
         setUser({
           name: userData.name,

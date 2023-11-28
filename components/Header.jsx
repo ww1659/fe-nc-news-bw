@@ -1,11 +1,17 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export const Header = () => {
   return (
-    <Container>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "end",
+        alignItems: "center",
+      }}
+    >
       <Typography color="white" variant="overline" sx={{ fontSize: "24px" }}>
         NC NEWS
       </Typography>
-    </Container>
+    </Box>
   );
 };

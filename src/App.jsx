@@ -8,20 +8,20 @@ import { IndividualArticle } from "../components/IndividualArticle";
 import { FilterArticles } from "../components/FilterArticles";
 import { LoginPage } from "../components/LoginPage";
 import { ProfileDrawer } from "../components/ProfileDrawer";
-// import { TopicDrawer } from "../components/TopicDrawer";
-// import { ArticlesByTopic } from "../components/ArticlesByTopic";
+import { TopicDrawer } from "../components/TopicDrawer";
+import { ArticlesByTopic } from "../components/ArticlesByTopic";
 
 function App() {
-  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isTopicDrawerOpen, setIsTopicDrawerOpen] = useState(false);
   const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <>
-      {/* <TopicDrawer
-        isDrawerOpen={isDrawerOpen}
-        setIsDrawerOpen={setIsDrawerOpen}
-      /> */}
+      <TopicDrawer
+        isTopicDrawerOpen={isTopicDrawerOpen}
+        setIsTopicDrawerOpen={setIsTopicDrawerOpen}
+      />
       {
         <ProfileDrawer
           isProfileDrawerOpen={isProfileDrawerOpen}
@@ -34,7 +34,7 @@ function App() {
           element={
             <>
               <Navbar
-                isProfileDrawerOpen={isProfileDrawerOpen}
+                setIsTopicDrawerOpen={setIsTopicDrawerOpen}
                 setIsProfileDrawerOpen={setIsProfileDrawerOpen}
               />
               <FilterArticles
@@ -49,7 +49,11 @@ function App() {
           path={`/login`}
           element={
             <>
-              <Navbar /> <LoginPage />
+              <Navbar
+                setIsTopicDrawerOpen={setIsTopicDrawerOpen}
+                setIsProfileDrawerOpen={setIsProfileDrawerOpen}
+              />
+              <LoginPage />
             </>
           }
         ></Route>
@@ -61,15 +65,18 @@ function App() {
             />
           }
         ></Route>
-        {/* <Route
+        <Route
           path={"/articles/topics/:topic"}
           element={
             <>
-              <Navbar setIsDrawerOpen={setIsDrawerOpen} />
+              <Navbar
+                setIsTopicDrawerOpen={setIsTopicDrawerOpen}
+                setIsProfileDrawerOpen={setIsProfileDrawerOpen}
+              />
               <ArticlesByTopic />
             </>
           }
-        ></Route> */}
+        ></Route>
       </Routes>
     </>
   );

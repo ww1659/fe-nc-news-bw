@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
+import { fetchArticleById, updateArticleVotes } from "../utils/api";
+import { useAuth } from "../utils/auth.js";
+
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import { useEffect, useState } from "react";
-import { fetchArticleById, updateArticleVotes } from "../utils/api";
 
 export const ArticleVotes = ({ votes, articleId }) => {
   const [articleVoteCount, setArticleVoteCount] = useState(votes);
   const [error, setError] = useState(null);
   const [toggleUpButton, setToggleUpButton] = useState(false);
   const [toggleDownButton, setToggleDownButton] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     fetchArticleById(articleId).then((updatedArticle) => {
@@ -45,26 +48,30 @@ export const ArticleVotes = ({ votes, articleId }) => {
       <Grid item xs={8} sm={8} md={3} lg={2}>
         <Typography variant="h6">Article votes: {articleVoteCount}</Typography>
       </Grid>
-      <Grid item xs={2} sm={2} md={1} lg={1}>
-        <IconButton
-          color={toggleUpButton ? "primary" : "inherit"}
-          aria-label="like button"
-          onClick={() => handleVotes("up")}
-          disabled={toggleUpButton}
-        >
-          <ThumbUpOffAltIcon />
-        </IconButton>
-      </Grid>
-      <Grid item xs={2} sm={2} md={1} lg={1}>
-        <IconButton
-          color={toggleDownButton ? "primary" : "inherit"}
-          aria-label="dislike button"
-          onClick={() => handleVotes("down")}
-          disabled={toggleDownButton}
-        >
-          <ThumbDownOffAltIcon />
-        </IconButton>
-      </Grid>
+      {user.role === "user" ? (
+        <>
+          <Grid item xs={2} sm={2} md={1} lg={1}>
+            <IconButton
+              color={toggleUpButton ? "primary" : "inherit"}
+              aria-label="like button"
+              onClick={() => handleVotes("up")}
+              disabled={toggleUpButton}
+            >
+              <ThumbUpOffAltIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs={2} sm={2} md={1} lg={1}>
+            <IconButton
+              color={toggleDownButton ? "primary" : "inherit"}
+              aria-label="dislike button"
+              onClick={() => handleVotes("down")}
+              disabled={toggleDownButton}
+            >
+              <ThumbDownOffAltIcon />
+            </IconButton>
+          </Grid>
+        </>
+      ) : null}
     </Grid>
   );
 };

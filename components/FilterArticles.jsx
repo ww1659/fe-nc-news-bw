@@ -57,7 +57,7 @@ export const FilterArticles = ({ searchParams, setSearchParams }) => {
     setSearchParams(newParams);
   };
 
-  if (isTopicLoading) return <p>Loading</p>;
+  if (isTopicLoading) return <p></p>;
   if (topicError) return <p>Error with topics, please refresh</p>;
 
   return (
