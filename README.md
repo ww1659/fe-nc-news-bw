@@ -13,7 +13,7 @@ Username: jessjelly
 ## Table of Contents
 
 - [Features](#features)
-- [Instructions](#getting-started)
+- [Instructions](#instructions)
 
 ## Features
 
