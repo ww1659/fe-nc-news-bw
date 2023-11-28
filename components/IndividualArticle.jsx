@@ -6,6 +6,7 @@ import {
   Grid,
   IconButton,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -14,7 +15,9 @@ import { Backbar } from "./Backbar";
 import { CommentsList } from "./CommentsList";
 import { ArticleVotes } from "./ArticleVotes";
 import { AddCommentBar } from "./AddCommentBar";
+
 import CloseIcon from "@mui/icons-material/Close";
+import { AddCommentButton } from "./AddCommentButton";
 
 export const IndividualArticle = ({ setIsProfileDrawerOpen }) => {
   const [error, setError] = useState(null);
@@ -27,6 +30,7 @@ export const IndividualArticle = ({ setIsProfileDrawerOpen }) => {
     visible: false,
   });
   const { articleId } = useParams();
+  const isMediumScreen = useMediaQuery("(min-width:600px)");
 
   const showNotification = (message) => {
     setNotification({ message, visible: true });
@@ -113,9 +117,23 @@ export const IndividualArticle = ({ setIsProfileDrawerOpen }) => {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Typography variant="body1">{article[0].body}</Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Grid item xs={12} sm={10} md={10} lg={10}>
             <ArticleVotes votes={article[0].votes} articleId={articleId} />
           </Grid>
+          {isMediumScreen ? (
+            <div
+              style={{
+                position: "fixed",
+                bottom: "5%",
+                right: "7%",
+              }}
+            >
+              <AddCommentButton
+                articleId={articleId}
+                setComments={setComments}
+              />
+            </div>
+          ) : null}
         </Grid>
         <CommentsList
           comments={comments}
@@ -156,7 +174,9 @@ export const IndividualArticle = ({ setIsProfileDrawerOpen }) => {
           </Alert>
         </div>
       ) : null}
-      <AddCommentBar articleId={articleId} setComments={setComments} />
+      {!isMediumScreen ? (
+        <AddCommentBar articleId={articleId} setComments={setComments} />
+      ) : null}
     </Container>
   );
 };

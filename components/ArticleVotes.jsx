@@ -45,12 +45,34 @@ export const ArticleVotes = ({ votes, articleId }) => {
 
   return (
     <Grid container sx={{ display: "flex", alignItems: "center" }}>
-      <Grid item xs={8} sm={8} md={3} lg={2}>
+      <Grid
+        item
+        xs={8}
+        sm={5}
+        md={3}
+        lg={3}
+        sx={{
+          display: "flex",
+          justifyContent: "start",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h6">Article votes: {articleVoteCount}</Typography>
       </Grid>
       {user.role === "user" ? (
         <>
-          <Grid item xs={2} sm={2} md={1} lg={1}>
+          <Grid
+            item
+            xs={2}
+            sm={1}
+            md={1}
+            lg={1}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <IconButton
               color={toggleUpButton ? "primary" : "inherit"}
               aria-label="like button"
@@ -60,7 +82,18 @@ export const ArticleVotes = ({ votes, articleId }) => {
               <ThumbUpOffAltIcon />
             </IconButton>
           </Grid>
-          <Grid item xs={2} sm={2} md={1} lg={1}>
+          <Grid
+            item
+            xs={2}
+            sm={1}
+            md={1}
+            lg={1}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <IconButton
               color={toggleDownButton ? "primary" : "inherit"}
               aria-label="dislike button"

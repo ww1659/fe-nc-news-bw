@@ -50,8 +50,8 @@ export const TopicDrawer = ({ isTopicDrawerOpen, setIsTopicDrawerOpen }) => {
       PaperProps={{
         sx: {
           bgcolor: "#D2D5DD",
-          width: !isLargeScreen ? "30%" : "10%",
-          marginTop: isLargeScreen ? "64px" : "0px",
+          width: !isLargeScreen ? "200px" : "10%",
+          marginTop: isLargeScreen ? "65px" : "0px",
         },
       }}
       anchor="left"
