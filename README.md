@@ -1,19 +1,19 @@
 # NC News
 
-Welcome! This is my initial attempt at creating a frontend news site with React, using the MUI library for layout / styling. The app connects to the API previously developed here [bw-news-app.onrender.com] to serve information on articles, topics, users and comments.
+Welcome! This is my initial attempt at creating a frontend news site with React, using the MUI library for layout & styling. The app connects to the API previously developed here [bw-news-app.onrender.com](bw-news-app.onrender.com) to serve information on articles, topics, users and comments.
 
 ## Hosted Version
 
 You can access the hosted version of the project at [https://bw-nc-news.netlify.app/](https://bw-nc-news.netlify.app/). For logging in, use the following test credentials.
 
 Name: Jess Jelly
+
 Username: jessjelly
 
 ## Table of Contents
 
 - [Features](#features)
 - [Instructions](#getting-started)
-- [Built With](#built-with)
 
 ## Features
 
