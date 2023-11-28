@@ -1,38 +1,61 @@
-# Your Project Name
+# NC News
 
-Description of your project goes here. Briefly explain what your news site does and its main features.
+Welcome! This is my initial attempt at creating a frontend news site with React, using the MUI library for layout / styling. The app connects to the API previously developed here [bw-news-app.onrender.com] to serve information on articles, topics, users and comments.
+
+## Hosted Version
+
+You can access the hosted version of the project at [https://bw-nc-news.netlify.app/](https://bw-nc-news.netlify.app/). For logging in, use the following test credentials.
+
+Name: Jess Jelly
+Username: jessjelly
 
 ## Table of Contents
 
 - [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
+- [Instructions](#getting-started)
 - [Built With](#built-with)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Features
 
-- Feature 1
-- Feature 2
-- ...
+- User Authentication: Allow users to register and log in and log out with personalised accounts.
 
-## Getting Started
+- Responsive Design on various devices.
 
-### Prerequisites
+- Optimistic Rendering of elements to provide a smoother UI/UX.
+
+- Sorting and Filtering: Implement sorting and filtering options for articles based on topics, dates, or other criteria.
+
+- Article Listing: Display a list of articles with titles, authors, and topics.
+
+- Article Details: Provide detailed views for individual articles, including content, images, and comments.
+
+- User Interaction: Allow users to vote and comment on articles.
+
+- Loading Indicators:
+  Include loading indicators to enhance the user experience during data fetching.
+
+### Instructions
+
+1. Initialize the project as a Node project:
+
+```
+npm init -y
+```
 
 Before you begin, ensure you have met the following requirements:
 
-- Node.js installed
-- Your backend API up and running
+2. For dependencies:
 
-### Installation
+```
+npm install axios, react, react-router-dom
+```
 
-1. Clone the repository:
+3. Scripts can be found in the `package.json`. To build and deploy the app to your localhost, run the 'dev' script.
 
-   ```bash
-   git clone https://github.com/yourusername/your-project.git
-   ```
+```
+npm run dev
+```
+
+Once you have done this, you will be able to see this development project at the following address: http://localhost:5173/
+
+Cheers! You're now ready to use and test this REACT project.
