@@ -1,16 +1,17 @@
 /* eslint-disable react/prop-types */
 import {
   Box,
-  Button,
   CircularProgress,
   Divider,
   Drawer,
   Grid,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -24,6 +25,7 @@ export const TopicDrawer = ({ isTopicDrawerOpen, setIsTopicDrawerOpen }) => {
   const [topicError, setTopicError] = useState(null);
   const [isTopicLoading, setIsTopicLoading] = useState(false);
   const navigate = useNavigate();
+  const isLargeScreen = useMediaQuery("(min-width:1536px)");
 
   useEffect(() => {
     setIsTopicLoading(true);
@@ -46,9 +48,14 @@ export const TopicDrawer = ({ isTopicDrawerOpen, setIsTopicDrawerOpen }) => {
   return (
     <Drawer
       PaperProps={{
-        sx: { bgcolor: "#D2D5DD", width: "50%" },
+        sx: {
+          bgcolor: "#D2D5DD",
+          width: !isLargeScreen ? "30%" : "10%",
+          marginTop: isLargeScreen ? "64px" : "0px",
+        },
       }}
       anchor="left"
+      variant={isLargeScreen ? "permanent" : null}
       open={isTopicDrawerOpen}
       onClose={() => setIsTopicDrawerOpen(false)}
     >
@@ -62,19 +69,51 @@ export const TopicDrawer = ({ isTopicDrawerOpen, setIsTopicDrawerOpen }) => {
       ) : null}
       <Grid
         container
-        direction="column"
         spacing={1}
         sx={{
           display: "flex",
           justifyContent: "left",
           paddingLeft: "10px",
+          paddingRight: "10px",
           paddingTop: "10px",
         }}
       >
-        <Grid item>
+        <Grid
+          item
+          xs={9}
+          sm={9}
+          md={9}
+          lg={9}
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h5">Topics</Typography>
         </Grid>
-        <Grid item>
+        <Grid
+          item
+          xs={3}
+          sm={3}
+          md={3}
+          lg={3}
+          sx={{
+            display: "flex",
+            justifyContent: "end",
+            alignItems: "center",
+          }}
+        >
+          {!isLargeScreen ? (
+            <IconButton
+              color="error"
+              onClick={() => setIsTopicDrawerOpen(false)}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : null}
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <Divider />
           <List>
             {topics.map((topic, index) => (
@@ -91,16 +130,6 @@ export const TopicDrawer = ({ isTopicDrawerOpen, setIsTopicDrawerOpen }) => {
             ))}
             <Divider />
           </List>
-        </Grid>
-
-        <Grid item>
-          <Button
-            color="error"
-            onClick={() => setIsTopicDrawerOpen(false)}
-            startIcon={<CloseIcon />}
-          >
-            <Typography variant="body2">Close</Typography>
-          </Button>
         </Grid>
       </Grid>
     </Drawer>

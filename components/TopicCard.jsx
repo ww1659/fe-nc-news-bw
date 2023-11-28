@@ -22,6 +22,7 @@ export const TopicCard = ({ article }) => {
         borderRadius: "10px",
         width: "100%",
         backgroundColor: "#B8BACF",
+        maxHeight: "12rem",
       }}
     >
       <Grid container spacing={0}>
@@ -76,7 +77,7 @@ export const TopicCard = ({ article }) => {
               alt="Image of Article"
               style={{
                 maxWidth: "100%",
-                maxHeight: "150px",
+                maxHeight: "auto",
                 borderRadius: "10%",
               }}
             />

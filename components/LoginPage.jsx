@@ -81,7 +81,7 @@ export const LoginPage = () => {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ marginTop: "20%" }}
+        sx={{ marginTop: "15%" }}
       >
         <Grid item sx={{ marginBottom: "20px" }}>
           <Typography variant="overline" sx={{ fontSize: "24px" }}>

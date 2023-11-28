@@ -70,7 +70,7 @@ export const ArticleCard = ({ article }) => {
             </Link>
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12} sx={{ maxHeight: "15rem" }}>
           <Link to={`/articles/${article.article_id}`}>
             <img
               src={article.article_img_url}
