@@ -33,8 +33,7 @@ It is not the most beautiful looking application, but this project did give me a
 
 - User Interaction: Allow users to vote and comment on articles.
 
-- Loading Indicators:
-  Include loading indicators to enhance the user experience during data fetching.
+- Loading Indicators and lazy loading (of comments): Include loading indicators to enhance the user experience during data fetching.
 
 ### Instructions
 
