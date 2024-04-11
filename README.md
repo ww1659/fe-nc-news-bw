@@ -10,6 +10,8 @@ Name: Jess Jelly
 
 Username: jessjelly
 
+It is not the most beautiful looking application, but this project did give me a chance to understand how to use MUI and implement a responsive webpage. 
+
 ## Table of Contents
 
 - [Features](#features)
